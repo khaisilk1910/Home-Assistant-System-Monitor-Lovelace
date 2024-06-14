@@ -6,5 +6,5 @@ Cần cài các Intergrations qua HACS:
 	
   3 - https://github.com/thomasloven/lovelace-card-mod
 	
-Thay các Entity trong file với Entity thực tế của bạn
+Thay các Entity trong file System Monitor Lovelace.yaml với Entity và nội dung thực tế của bạn
 ![System Monitor Lovelace](https://github.com/khaisilk1910/Home-Assistant-System-Monitor-Lovelace/assets/3167468/a8fb99fb-3077-4465-b0b4-44181e92e78d)
