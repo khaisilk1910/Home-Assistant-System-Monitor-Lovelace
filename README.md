@@ -5,6 +5,8 @@ Cần cài các Intergrations qua HACS:
   2 - https://github.com/RomRider/apexcharts-card
 	
   3 - https://github.com/thomasloven/lovelace-card-mod
+
+  4 - https://github.com/piitaya/lovelace-mushroom
 	
 Thay các Entity và nội dung thực tế của bạn tại variables: trong file System Monitor Lovelace.yaml như ảnh dưới:
 
