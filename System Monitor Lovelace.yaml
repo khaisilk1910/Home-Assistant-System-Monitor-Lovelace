@@ -1,0 +1,546 @@
+type: custom:button-card
+name: Intel® NUC6CAYH
+label: Celeron® J3455 (2M Cache, up to 2.30 GHz)
+show_icon: true
+show_name: true
+show_state: false
+show_label: true
+entity: vacuum.xiaomi_c103_dbe2_robot_cleaner
+show_entity_picture: true
+entity_picture: /local/background/NUC6CAYH.png
+styles:
+  card:
+    - font-size: 90%
+    - color: white
+    - padding: 0px 0px 0px 0px
+    - margin: 0px 0px 0px 0px
+    - align-self: middle
+    - justify-self: center
+    - text-align: center
+    - background: linear-gradient(180deg, rgba(1,114,204,0.8) 0%, rgba(0,45,82,0.8) 100%)
+    - '--mdc-ripple-color': rgba(180, 69, 69, 0.8)
+    - '--mdc-ripple-press-opacity': 0.2
+  img_cell:
+    - justify-content: center
+    - justify-self: center
+    - align-items: middle
+    - align-self: start
+    - width: 100%
+    - height: 120px
+    - padding: 0px 0px 0px 0px
+    - margin: 0px 0px 0px 0px
+  icon:
+    - align-self: middle
+    - height: 100%
+    - width: 290px
+    - padding: 0px 0px 0px 0px
+    - margin: 0px 0px 0px 0px
+    - border-radius: 0%
+  state:
+    - align-self: middle
+    - text-align: center
+    - justify-self: center
+    - font-size: 30px
+    - font-weight: bold
+    - color: rgba(24, 188, 242, 1)
+    - margin: 0px 0px 0px 0px
+    - padding: 0px 0px 0px 0px
+  name:
+    - font-size: 18px
+    - text-align: center
+    - font-weight: bold
+    - align-self: middle
+    - justify-self: center
+    - margin: 5px 0px 0px 0px
+    - padding: 0px 0px 0px 0px
+  grid:
+    - grid-template-areas: >-
+        "cpu cpu cpu cpu" "i i i i" "n n n n" "l l l l" "ram ram ram ram" "ssd
+        ssd ssd ssd" "start start start start" "start2 start2 start2 start2" 
+    - grid-template-columns: 1fr 1fr 1fr 1fr
+    - grid-template-rows: >-
+        min-content min-content min-content min-content min-content min-content
+        min-content min-content
+  custom_fields:
+    ssd:
+      - align-self: middle
+      - justify-self: center
+      - text-align: middle
+      - margin: 0px 0px 5px 0px
+      - padding: 0px 0px 0px 0px
+      - width: 100%
+    ram:
+      - align-self: middle
+      - justify-self: center
+      - text-align: middle
+      - margin: 5px 0px 10px 0px
+      - padding: 0px 0px 0px 0px
+      - width: 100%
+    cpu:
+      - align-self: middle
+      - justify-self: center
+      - text-align: middle
+      - margin: '-10px 0px -10px 0px'
+      - padding: 0px 0px 0px 0px
+      - width: 100%
+    start2:
+      - align-self: middle
+      - justify-self: center
+      - width: 100%
+      - text-align: middle
+      - margin: 5px 0px 5px 0px
+      - padding: 0px 0px 0px 0px
+custom_fields:
+  ssd:
+    card:
+      type: custom:button-card
+      name: SSD
+      icon: mdi:harddisk
+      entity: sensor.system_monitor_disk_usage
+      custom_fields:
+        bar: |-
+          [[[ var color1 = "red";
+            var state1 = states['sensor.system_monitor_disk_usage'].state;      
+            return `<div><div style="background-color:${color1}; height:18px; width:${state1}%"></div>`
+          ]]]
+        stat1: |-
+          [[[
+            return states['sensor.system_monitor_disk_use'].state + 'GB';  
+          ]]]
+        stat2: |-
+          [[[
+            return states['sensor.system_monitor_disk_free'].state  + 'GB Free';    
+          ]]]
+        stat3: 120GB
+      styles:
+        custom_fields:
+          bar:
+            - justify-self: start
+            - width: 100%
+            - height: 18px
+            - background: rgba(0, 255, 100, 1)
+          stat1:
+            - justify-self: start
+            - font-size: 14px
+            - font-weight: bold
+            - margin: 4px 0px 0px 0px
+          stat2:
+            - justify-self: center
+            - font-size: 14px
+            - font-weight: bold
+            - margin: 4px 0px 0px 0px
+          stat3:
+            - justify-self: end
+            - font-size: 14px
+            - font-weight: bold
+            - margin: 4px 0px 0px 0px
+        grid:
+          - grid-template-areas: '"i n n" "bar bar bar" "stat1 stat2 stat3"'
+          - grid-template-columns: 1fr 1fr 1fr
+          - grid-template-rows: min-content min-content min-content
+        card:
+          - padding: 0px 0px 0px 0px
+          - margin: 0px 0px 0px 0px
+          - background: transparent
+          - border: none
+          - border-radius: 0%
+        img_cell:
+          - justify-self: start
+          - width: 26px
+          - height: 24px
+          - padding-bottom: 8px
+          - marign-left: 3px
+        icon:
+          - width: 26px
+          - color: rgba(0, 255, 100, 1)
+          - padding: 0px 0px 0px 0px
+          - margin: 0px 0px 0px 0px
+        name:
+          - position: absolute
+          - justify-self: start
+          - align-self: start
+          - font-size: 18px
+          - padding: 2px 0px 0px 30px
+          - margin: 0px 0px 0px 0px
+          - font-weight: bold
+  ram:
+    card:
+      type: custom:button-card
+      name: Memory
+      icon: mdi:memory
+      entity: sensor.system_monitor_memory_usage
+      custom_fields:
+        bar: |-
+          [[[ var color1 = "red";
+            var state1 = states['sensor.system_monitor_memory_usage'].state;      
+            return `<div><div style="background-color:${color1}; height:18px; width:${state1}%"></div>`
+          ]]]
+        stat1: |-
+          [[[
+            return states['sensor.system_monitor_memory_use'].state + 'MB';
+          ]]]
+        stat2: |-
+          [[[
+            return states['sensor.system_monitor_memory_free'].state  + 'MB Free';    
+          ]]]
+        stat3: 8GB
+      styles:
+        custom_fields:
+          bar:
+            - justify-self: start
+            - width: 100%
+            - height: 18px
+            - background: rgba(0, 255, 100, 1)
+          stat1:
+            - justify-self: start
+            - font-size: 14px
+            - font-weight: bold
+            - margin: 4px 0px 0px 0px
+          stat2:
+            - justify-self: center
+            - font-size: 14px
+            - font-weight: bold
+            - margin: 4px 0px 0px 0px
+          stat3:
+            - justify-self: end
+            - font-size: 14px
+            - font-weight: bold
+            - margin: 4px 0px 0px 0px
+        grid:
+          - grid-template-areas: '"i n n" "bar bar bar" "stat1 stat2 stat3"'
+          - grid-template-columns: 1fr 1fr 1fr
+          - grid-template-rows: min-content min-content min-content
+        card:
+          - padding: 0px 0px 0px 0px
+          - margin: 0px 0px 0px 0px
+          - background: transparent
+          - border: none
+          - border-radius: 0%
+        img_cell:
+          - justify-self: start
+          - width: 26px
+          - height: 24px
+          - padding-bottom: 8px
+          - marign-left: 3px
+        icon:
+          - width: 26px
+          - color: rgba(0, 255, 100, 1)
+          - padding: 0px 0px 0px 0px
+          - margin: 0px 0px 0px 0px
+        name:
+          - position: absolute
+          - justify-self: start
+          - align-self: start
+          - font-size: 18px
+          - padding: 0px 0px 0px 30px
+          - margin: 0px 0px 0px 0px
+          - font-weight: bold
+  start2:
+    card:
+      type: vertical-stack
+      cards:
+        - type: horizontal-stack
+          cards:
+            - type: tile
+              entity: sensor.uptime
+              color: rgba(0, 255, 100, 1)
+              vertical: false
+              name: Up Time
+              card_mod:
+                style:
+                  .: |-
+                    ha-card {
+                      --ha-card-background: rgba(0,45,82, 0.3) !important;
+                      color: white !important;
+                      --primary-text-color: white !important;
+                  ha-tile-info$: |-
+                    .primary {
+                                          font-size: 18px !important;
+                     font-weight: bold !important;
+                     color: white !important;
+                     padding-bottom: 4px;
+                    }
+                    .secondary {
+                      font-size: 12px !important;
+                      color: rgba(0, 255, 100, 1) !important;
+                    }
+            - type: tile
+              entity: sensor.system_monitor_last_boot
+              color: rgba(0, 255, 100, 1)
+              vertical: false
+              name: Last Boot
+              card_mod:
+                style:
+                  .: |-
+                    ha-card {
+                      --ha-card-background: rgba(0,45,82, 0.3) !important;
+                      color: white !important;
+                      --primary-text-color: white !important;
+                  ha-tile-info$: |-
+                    .primary {
+                                          font-size: 18px !important;
+                     font-weight: bold !important;
+                     color: white !important;
+                     padding-bottom: 4px;
+                    }
+                    .secondary {
+                      font-size: 12px !important;
+                      color: rgba(0, 255, 100, 1) !important;
+                    }
+        - type: horizontal-stack
+          cards:
+            - type: tile
+              entity: sensor.system_monitor_network_throughput_in_enp3s0
+              color: rgba(0, 255, 100, 1)
+              vertical: false
+              name: Download
+              card_mod:
+                style:
+                  .: |-
+                    ha-card {
+                      --ha-card-background: rgba(0,45,82, 0.3) !important;
+                      color: white !important;
+                      --primary-text-color: white !important;
+                  ha-tile-info$: |-
+                    .primary {
+                                          font-size: 18px !important;
+                     font-weight: bold !important;
+                     color: white !important;
+                     padding-bottom: 4px;
+                    }
+                    .secondary {
+                      font-size: 12px !important;
+                      color: rgba(0, 255, 100, 1) !important;
+                    }
+            - type: tile
+              entity: sensor.system_monitor_network_throughput_out_enp3s0
+              color: rgba(0, 255, 100, 1)
+              vertical: false
+              name: Upload
+              card_mod:
+                style:
+                  .: |-
+                    ha-card {
+                      --ha-card-background: rgba(0,45,82, 0.3) !important;
+                      color: white !important;
+                      --primary-text-color: white !important;
+                  ha-tile-info$: |-
+                    .primary {
+                                          font-size: 18px !important;
+                     font-weight: bold !important;
+                     color: white !important;
+                     padding-bottom: 4px;
+                    }
+                    .secondary {
+                      font-size: 12px !important;
+                      color: rgba(0, 255, 100, 1) !important;
+                    }
+        - type: horizontal-stack
+          cards:
+            - type: tile
+              entity: sensor.local_ip
+              color: rgba(0, 255, 100, 1)
+              vertical: false
+              name: Local IP
+              card_mod:
+                style:
+                  .: |-
+                    ha-card {
+                      --ha-card-background: rgba(0,45,82, 0.3) !important;
+                      color: white !important;
+                      --primary-text-color: white !important;
+                  ha-tile-info$: |-
+                    .primary {
+                                          font-size: 18px !important;
+                     font-weight: bold !important;
+                     color: white !important;
+                     padding-bottom: 4px;
+                    }
+                    .secondary {
+                      font-size: 12px !important;
+                      color: rgba(0, 255, 100, 1) !important;
+                    }
+            - type: tile
+              entity: sensor.myip
+              color: rgba(0, 255, 100, 1)
+              vertical: false
+              name: IP
+              card_mod:
+                style:
+                  .: |-
+                    ha-card {
+                      --ha-card-background: rgba(0,45,82, 0.3) !important;
+                      color: white !important;
+                      --primary-text-color: white !important;
+                  ha-tile-info$: |-
+                    .primary {
+                                          font-size: 18px !important;
+                     font-weight: bold !important;
+                     color: white !important;
+                     padding-bottom: 4px;
+                    }
+                    .secondary {
+                      font-size: 12px !important;
+                      color: rgba(0, 255, 100, 1) !important;
+                    }
+        - type: horizontal-stack
+          cards:
+            - type: tile
+              entity: sensor.cpu_speed
+              color: rgba(0, 255, 100, 1)
+              vertical: false
+              name: CPU
+              state_content: state
+              card_mod:
+                style:
+                  .: |-
+                    ha-card {
+                      --ha-card-background: rgba(0,45,82, 0.3) !important;
+                      color: white !important;
+                      --primary-text-color: white !important;
+                  ha-tile-info$: |-
+                    .primary {
+                                          font-size: 18px !important;
+                     font-weight: bold !important;
+                     color: white !important;
+                     padding-bottom: 4px;
+                    }
+                    .secondary {
+                      font-size: 12px !important;
+                      color: rgba(0, 255, 100, 1) !important;
+                    }
+            - type: tile
+              entity: sensor.home_assistant_operating_system_version
+              color: rgba(0, 255, 100, 1)
+              vertical: false
+              name: System Version
+              icon: mdi:home-assistant
+              card_mod:
+                style:
+                  .: |-
+                    ha-card {
+                      --ha-card-background: rgba(0,45,82, 0.3) !important;
+                      color: white !important;
+                      --primary-text-color: white !important;
+                  ha-tile-info$: |-
+                    .primary {
+                                          font-size: 18px !important;
+                     font-weight: bold !important;
+                     color: white !important;
+                     padding-bottom: 4px;
+                    }
+                    .secondary {
+                      font-size: 12px !important;
+                      color: rgba(0, 255, 100, 1) !important;
+                    }
+        - type: horizontal-stack
+          cards:
+            - type: tile
+              entity: update.home_assistant_core_update
+              color: rgba(0, 255, 100, 1)
+              vertical: false
+              name: Core Version
+              state_content:
+                - installed_version
+                - latest_version
+              icon: mdi:home-assistant
+              card_mod:
+                style:
+                  .: |-
+                    ha-card {
+                      --ha-card-background: rgba(0,45,82, 0.3) !important;
+                      color: white !important;
+                      --primary-text-color: white !important;
+                  ha-tile-info$: |-
+                    .primary {
+                                          font-size: 18px !important;
+                     font-weight: bold !important;
+                     color: white !important;
+                     padding-bottom: 4px;
+                    }
+                    .secondary {
+                      font-size: 12px !important;
+                      color: rgba(0, 255, 100, 1) !important;
+                    }
+            - type: tile
+              entity: update.home_assistant_supervisor_update
+              color: rgba(0, 255, 100, 1)
+              vertical: false
+              name: Supervisor Version
+              state_content:
+                - installed_version
+                - latest_version
+              icon: mdi:home-assistant
+              card_mod:
+                style:
+                  .: |-
+                    ha-card {
+                      --ha-card-background: rgba(0,45,82, 0.3) !important;
+                      color: white !important;
+                      --primary-text-color: white !important;
+                  ha-tile-info$: |-
+                    .primary {
+                                          font-size: 18px !important;
+                     font-weight: bold !important;
+                     color: white !important;
+                     padding-bottom: 4px;
+                    }
+                    .secondary {
+                      font-size: 12px !important;
+                      color: rgba(0, 255, 100, 1) !important;
+                    }
+  cpu:
+    card:
+      type: custom:apexcharts-card
+      experimental:
+        color_threshold: true
+        brush: true
+      apex_config:
+        chart:
+          height: 200px
+      graph_span: 24h
+      chart_type: line
+      update_interval: 5sec
+      cache: true
+      series:
+        - entity: sensor.system_monitor_processor_temperature
+          color: blue
+          type: line
+          stroke_width: 2
+          curve: smooth
+          group_by:
+            duration: 20min
+            func: max
+          color_threshold:
+            - value: 0
+              color: green
+            - value: 50
+              color: yellow
+            - value: 70
+              color: orange
+            - value: 90
+              color: red
+        - entity: sensor.system_monitor_processor_use
+          color: blue
+          type: line
+          stroke_width: 2
+          curve: smooth
+          group_by:
+            duration: 20min
+            func: max
+          color_threshold:
+            - value: 0
+              color: green
+            - value: 50
+              color: yellow
+            - value: 70
+              color: orange
+            - value: 90
+              color: red
+      card_mod:
+        style:
+          .: |-
+            ha-card {
+              --ha-card-background: rgba(255, 228, 181, 0) !important;
+              border: none !important; 
+            }
