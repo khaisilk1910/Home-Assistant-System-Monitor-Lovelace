@@ -1,13 +1,27 @@
 type: custom:button-card
-name: Intel® NUC6CAYH
-label: Celeron® J3455 (2M Cache, up to 2.30 GHz)
+variables:
+  main_entity: sensor.system_monitor_processor_use
+  main_name: Intel® NUC6CAYH
+  main_label: Celeron® J3455 (2M Cache, up to 2.30 GHz)
+  main_picture: /local/background/NUC6CAYH.png
+  main_background: linear-gradient(180deg, rgba(1,114,204,0.8) 0%, rgba(0,45,82,0.8) 100%)
+  memory_usage: sensor.system_monitor_memory_usage
+  memory_free: sensor.system_monitor_memory_free
+  memory_use: sensor.system_monitor_memory_use
+  memory_total: 8GB
+  ssd_usage: sensor.system_monitor_disk_usage
+  ssd_free: sensor.system_monitor_disk_free
+  ssd_use: sensor.system_monitor_disk_use
+  ssd_total: 120GB
+name: '[[[ return variables.main_name; ]]]'
+label: '[[[ return variables.main_label; ]]]'
 show_icon: true
 show_name: true
 show_state: false
 show_label: true
-entity: vacuum.xiaomi_c103_dbe2_robot_cleaner
+entity: '[[[ return variables.main_entity; ]]]'
 show_entity_picture: true
-entity_picture: /local/background/NUC6CAYH.png
+entity_picture: '[[[ return variables.main_picture; ]]]'
 styles:
   card:
     - font-size: 90%
@@ -17,7 +31,7 @@ styles:
     - align-self: middle
     - justify-self: center
     - text-align: center
-    - background: linear-gradient(180deg, rgba(1,114,204,0.8) 0%, rgba(0,45,82,0.8) 100%)
+    - background: '[[[ return variables.main_background; ]]]'
     - '--mdc-ripple-color': rgba(180, 69, 69, 0.8)
     - '--mdc-ripple-press-opacity': 0.2
   img_cell:
@@ -96,22 +110,22 @@ custom_fields:
       type: custom:button-card
       name: SSD
       icon: mdi:harddisk
-      entity: sensor.system_monitor_disk_usage
+      entity: '[[[ return variables.ssd_usage; ]]]'
       custom_fields:
         bar: |-
           [[[ var color1 = "red";
-            var state1 = states['sensor.system_monitor_disk_usage'].state;      
+            var state1 = states[variables.ssd_usage].state;      
             return `<div><div style="background-color:${color1}; height:18px; width:${state1}%"></div>`
           ]]]
         stat1: |-
           [[[
-            return states['sensor.system_monitor_disk_use'].state + 'GB';  
+            return states[variables.ssd_usage].state + 'GB';  
           ]]]
         stat2: |-
           [[[
-            return states['sensor.system_monitor_disk_free'].state  + 'GB Free';    
+            return states[variables.ssd_free].state  + 'GB Free';    
           ]]]
-        stat3: 120GB
+        stat3: '[[[ return variables.ssd_total; ]]]'
       styles:
         custom_fields:
           bar:
@@ -168,22 +182,22 @@ custom_fields:
       type: custom:button-card
       name: Memory
       icon: mdi:memory
-      entity: sensor.system_monitor_memory_usage
+      entity: '[[[ return variables.memory_usage; ]]]'
       custom_fields:
         bar: |-
           [[[ var color1 = "red";
-            var state1 = states['sensor.system_monitor_memory_usage'].state;      
+            var state1 = states[variables.memory_usage].state;      
             return `<div><div style="background-color:${color1}; height:18px; width:${state1}%"></div>`
           ]]]
         stat1: |-
           [[[
-            return states['sensor.system_monitor_memory_use'].state + 'MB';
+            return states[variables.memory_use].state + 'MB';
           ]]]
         stat2: |-
           [[[
-            return states['sensor.system_monitor_memory_free'].state  + 'MB Free';    
+            return states[variables.memory_free].state  + 'MB Free';    
           ]]]
-        stat3: 8GB
+        stat3: '[[[ return variables.memory_total; ]]]'
       styles:
         custom_fields:
           bar:
